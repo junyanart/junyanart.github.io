@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jun Yan — Investment & Art</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #ece8e1;
+      --cream-dark: #ddd8cf;
+      --ink: #2d2927;
+      --ink-light: #5c5650;
+      --vermilion: #8c1c1c;
+      --vermilion-light: #b02424;
+      --gold: #9a7d4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(236, 232, 225, 0.96);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+    }
+    #hero img.hero-logo {
+      width: min(560px, 88vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 3rem;
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink-light);
+      letter-spacing: 0.08em;
+      max-width: 520px;
+    }
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--vermilion);
+      margin: 2.5rem auto;
+      opacity: 0.6;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.4;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: var(--ink);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── Sections ── */
+    section { padding: 6rem 3rem; }
+    section:nth-child(even) { background: #f5f2ed; }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--vermilion);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      max-width: 640px;
+      line-height: 1.9;
+    }
+    .section-header {
+      max-width: 1100px;
+      margin: 0 auto 3.5rem;
+    }
+
+    /* ── About ── */
+    #about .about-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    #about .about-image {
+      position: relative;
+    }
+    #about .about-image img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+    #about .about-image::before {
+      content: '';
+      position: absolute;
+      top: -16px; left: -16px;
+      right: 16px; bottom: 16px;
+      border: 1px solid var(--vermilion);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    #about .about-text .section-body { max-width: 100%; }
+
+    /* ── Gallery Grid ── */
+    .gallery-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      columns: 3;
+      column-gap: 1.2rem;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.03);
+      filter: brightness(0.9);
+    }
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(45, 41, 39, 0.0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+    }
+    .gallery-item:hover .overlay {
+      background: rgba(45, 41, 39, 0.18);
+    }
+
+    /* ── Exhibition Section ── */
+    #exhibition .exhibit-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.2rem;
+    }
+    #exhibition .exhibit-grid img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    #exhibition .exhibit-grid img:hover { transform: scale(1.02); }
+    .exhibition-details {
+      max-width: 1100px;
+      margin: 3rem auto 0;
+      display: flex;
+      gap: 4rem;
+    }
+    .exhibit-meta {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .exhibit-meta .label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--vermilion);
+      font-family: 'Lato', sans-serif;
+      margin-bottom: 0.3rem;
+    }
+    .exhibit-meta .value {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(20, 18, 16, 0.92);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      background: none;
+      border: none;
+      font-weight: 300;
+    }
+
+    /* ── Contact / Footer ── */
+    #contact {
+      background: var(--ink);
+      color: rgba(255,255,255,0.85);
+      padding: 5rem 3rem;
+    }
+    #contact .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    #contact .section-label { color: #b47a4a; }
+    #contact .section-title { color: #fff; }
+    #contact .section-body { color: rgba(255,255,255,0.6); max-width: 100%; }
+    .contact-links {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .contact-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: color 0.2s;
+    }
+    .contact-links a:hover { color: #fff; }
+    .contact-links .link-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      width: 60px;
+      flex-shrink: 0;
+    }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 4rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Divider ornament ── */
+    .ornament {
+      text-align: center;
+      margin: 0 auto 3.5rem;
+      color: var(--vermilion);
+      opacity: 0.4;
+      font-size: 1.2rem;
+      letter-spacing: 0.5em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      #about .about-image { display: none; }
+      .gallery-grid { columns: 2; }
+      #exhibition .exhibit-grid { grid-template-columns: 1fr 1fr; }
+      #contact .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 580px) {
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.65rem; }
+      .gallery-grid { columns: 1; }
+      #exhibition .exhibit-grid { grid-template-columns: 1fr; }
+      .exhibition-details { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">Jun Yan</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#calligraphy">Calligraphy</a></li>
+      <li><a href="#antiquities">Antiquities</a></li>
+      <li><a href="#exhibition">Exhibition</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <img class="hero-logo" src="images/logo.png" alt="Jun Yan — Investment & Art">
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Where Classical Chinese Heritage Meets Discerning Investment</p>
+    <div class="scroll-hint">Explore</div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="images/gallery-01.jpg" alt="Jun Yan Art Gallery">
+      </div>
+      <div class="about-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">Heritage as Investment</h2>
+        <p class="section-body">
+          Jun Yan Investment &amp; Art bridges the world of classical Chinese cultural heritage and modern connoisseurship. We specialize in traditional calligraphy, stone seal rubbings (金石拓片), and ancient Buddhist artifacts — rare works of enduring historical and aesthetic significance.
+        </p>
+        <br>
+        <p class="section-body">
+          Our collection spans Northern Wei Buddhist stone carvings, Han dynasty painted tomb tiles, and contemporary masters of the classical ink arts. Each work is selected for its authenticity, provenance, and the depth of civilization it carries.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calligraphy & Seal Art -->
+  <section id="calligraphy">
+    <div class="section-header">
+      <p class="section-label">Collection</p>
+      <h2 class="section-title">Calligraphy &amp; Seal Art<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">金石书法</span></h2>
+      <p class="section-body">
+        Stone seal rubbings are among China's oldest art forms — capturing inscriptions from ancient bronze vessels, stone stelae, and carved seals. Combined with classical calligraphy, these works document millennia of Chinese civilization, spiritual practice, and philosophical thought.
+      </p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+    <div class="gallery-grid" id="calligraphy-gallery">
+      <div class="gallery-item" onclick="openLightbox('images/artwork-06.jpg')">
+        <img src="images/artwork-06.jpg" alt="Northern Wei Buddhist Stone Inscription Rubbing">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-02.jpg')">
+        <img src="images/artwork-02.jpg" alt="Sichuan Longxing Temple Relic Rubbing">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-08.jpg')">
+        <img src="images/artwork-08.jpg" alt="Chang Yu Shan Hui — Calligraphy and Seal Art">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-poster.jpg')">
+        <img src="images/artwork-poster.jpg" alt="Exhibition Artwork — Zhang Zhenguo & Sun Jun">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-05.jpg')">
+        <img src="images/artwork-05.jpg" alt="Chang Yu Shan Hui — Framed Piece">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-04.jpg')">
+        <img src="images/artwork-04.jpg" alt="Seal Rubbing with Calligraphy Text">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-01.jpg')">
+        <img src="images/artwork-01.jpg" alt="Calligraphy Diptych — Home Collection">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-03.jpg')">
+        <img src="images/artwork-03.jpg" alt="Classical Seal and Calligraphy Work">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-07.jpg')">
+        <img src="images/artwork-07.jpg" alt="Ink and Seal Composition">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-09.jpg')">
+        <img src="images/artwork-09.jpg" alt="Calligraphy Work">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-10.jpg')">
+        <img src="images/artwork-10.jpg" alt="Seal Rubbing Composition">
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Antiquities -->
+  <section id="antiquities">
+    <div class="section-header">
+      <p class="section-label">Collection</p>
+      <h2 class="section-title">Antiquities &amp; Artifacts<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">珍贵文物</span></h2>
+      <p class="section-body">
+        Our antiquities collection encompasses Buddhist stone sculptures from the Northern Wei, Tang, and Song dynasties, alongside Han dynasty painted tomb tiles and rare jade pieces. Each artifact is a fragment of history preserved across centuries — objects of scholarly significance and timeless beauty.
+      </p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox('images/antique-10.jpg')">
+        <img src="images/antique-10.jpg" alt="Buddhist Stone Carved Face — Close Detail">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-01.jpg')">
+        <img src="images/antique-01.jpg" alt="Buddha Head — Gray Limestone">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-09.jpg')">
+        <img src="images/antique-09.jpg" alt="Reclining Buddha Stone Relief Fragment">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-03.jpg')">
+        <img src="images/antique-03.jpg" alt="Buddhist Figure — White Marble Fragment">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-04.jpg')">
+        <img src="images/antique-04.jpg" alt="Han Dynasty Painted Tomb Tile — Dragon Motif">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-08.jpg')">
+        <img src="images/antique-08.jpg" alt="Buddhist Stone Fragment — Library Collection">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-02.jpg')">
+        <img src="images/antique-02.jpg" alt="Ancient Stone Vessel">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-05.jpg')">
+        <img src="images/antique-05.jpg" alt="Stone Carving Fragment">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-06.jpg')">
+        <img src="images/antique-06.jpg" alt="Buddhist Artifact">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-07.jpg')">
+        <img src="images/antique-07.jpg" alt="Ancient Carved Fragment">
+        <div class="overlay"></div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-11.jpg')">
+        <img src="images/antique-11.jpg" alt="Buddhist Stone Sculpture">
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exhibition -->
+  <section id="exhibition">
+    <div class="section-header">
+      <p class="section-label">Exhibition</p>
+      <h2 class="section-title">常與善會<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Chang Yu Shan Hui · Tokyo 2026</span></h2>
+      <p class="section-body">
+        A joint exhibition by calligraphers Zhang Zhenguo and Sun Jun, presented in partnership with Jun Yan Art. Held January 21–26, 2026 in Tokyo, the exhibition brought together classical stone seal rubbings and calligraphy in dialogue with a live Japanese audience.
+      </p>
+    </div>
+    <div class="exhibit-grid">
+      <img src="images/gallery-02.jpg" alt="Exhibition Gallery — Wide View" onclick="openLightbox('images/gallery-02.jpg')" style="cursor:zoom-in">
+      <img src="images/gallery-03.jpg" alt="Exhibition Gallery — Second View" onclick="openLightbox('images/gallery-03.jpg')" style="cursor:zoom-in">
+      <img src="images/gallery-01.jpg" alt="Artist at Exhibition" onclick="openLightbox('images/gallery-01.jpg')" style="cursor:zoom-in">
+    </div>
+    <div class="exhibition-details">
+      <div class="exhibit-meta">
+        <p class="label">Dates</p>
+        <p class="value">January 21 – 26, 2026</p>
+      </div>
+      <div class="exhibit-meta">
+        <p class="label">Location</p>
+        <p class="value">Tokyo, Japan</p>
+      </div>
+      <div class="exhibit-meta">
+        <p class="label">Artists</p>
+        <p class="value">張振國 · 孫君</p>
+      </div>
+      <div class="exhibit-meta">
+        <p class="label">Presented by</p>
+        <p class="value">Jun Yan Investment &amp; Art</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer -->
+  <footer id="contact">
+    <div class="contact-inner">
+      <div>
+        <p class="section-label">Get in Touch</p>
+        <h2 class="section-title">Inquiries &amp;<br>Acquisitions</h2>
+        <p class="section-body">
+          Whether you are a collector, investor, or simply drawn to the beauty of Chinese cultural heritage, we welcome your inquiry. Each piece in our collection carries a story worth telling.
+        </p>
+      </div>
+      <div>
+        <p class="section-body" style="margin-top:0.5rem;">
+          For acquisition inquiries, exhibition partnerships, or consultations on art investment, please reach out directly.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:junyanart@gmail.com">
+            <span class="link-label">Email</span>
+            junyanart@gmail.com
+          </a>
+          <a href="https://github.com/junyanart" target="_blank" rel="noopener">
+            <span class="link-label">Web</span>
+            junyanart.github.io
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-logo">Jun Yan — Investment &amp; Art</span>
+      <span class="footer-copy">&copy; 2026 Jun Yan Investment &amp; Art. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <button id="lightbox-close" onclick="closeLightbox()">&#215;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Lightbox
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
