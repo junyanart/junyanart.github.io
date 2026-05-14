@@ -55,6 +55,11 @@
       text-decoration: none;
       white-space: nowrap;
     }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -72,6 +77,36 @@
       transition: opacity 0.2s;
     }
     .nav-links a:hover { opacity: 1; }
+
+    /* ── Language Toggle ── */
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid rgba(45,41,39,0.25);
+      border-radius: 2px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .lang-btn button {
+      background: none;
+      border: none;
+      padding: 0.3rem 0.55rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      opacity: 0.45;
+      cursor: pointer;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .lang-btn button.active {
+      background: var(--ink);
+      color: var(--cream);
+      opacity: 1;
+    }
+    .lang-btn button:hover:not(.active) { opacity: 0.8; }
 
     /* ── Hero ── */
     #hero {
@@ -128,10 +163,10 @@
       animation: scrollLine 1.8s ease-in-out infinite;
     }
     @keyframes scrollLine {
-      0% { transform: scaleY(0); transform-origin: top; }
+      0%  { transform: scaleY(0); transform-origin: top; }
       50% { transform: scaleY(1); transform-origin: top; }
       51% { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
+      100%{ transform: scaleY(0); transform-origin: bottom; }
     }
 
     /* ── Sections ── */
@@ -173,9 +208,7 @@
       gap: 5rem;
       align-items: center;
     }
-    #about .about-image {
-      position: relative;
-    }
+    #about .about-image { position: relative; }
     #about .about-image img {
       width: 100%;
       height: 480px;
@@ -221,13 +254,8 @@
       inset: 0;
       background: rgba(45, 41, 39, 0.0);
       transition: background 0.3s;
-      display: flex;
-      align-items: flex-end;
-      padding: 1.2rem;
     }
-    .gallery-item:hover .overlay {
-      background: rgba(45, 41, 39, 0.18);
-    }
+    .gallery-item:hover .overlay { background: rgba(45, 41, 39, 0.18); }
 
     /* ── Exhibition Section ── */
     #exhibition .exhibit-grid {
@@ -251,9 +279,7 @@
       display: flex;
       gap: 4rem;
     }
-    .exhibit-meta {
-      font-family: 'Cormorant Garamond', serif;
-    }
+    .exhibit-meta { font-family: 'Cormorant Garamond', serif; }
     .exhibit-meta .label {
       font-size: 0.65rem;
       font-weight: 700;
@@ -399,21 +425,27 @@
   <!-- Navigation -->
   <nav id="navbar">
     <a class="nav-logo" href="#hero">Jun Yan</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#calligraphy">Calligraphy</a></li>
-      <li><a href="#antiquities">Antiquities</a></li>
-      <li><a href="#exhibition">Exhibition</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about"    data-i18n="nav-about">About</a></li>
+        <li><a href="#calligraphy" data-i18n="nav-calligraphy">Calligraphy</a></li>
+        <li><a href="#antiquities" data-i18n="nav-antiquities">Antiquities</a></li>
+        <li><a href="#exhibition"  data-i18n="nav-exhibition">Exhibition</a></li>
+        <li><a href="#contact"  data-i18n="nav-contact">Contact</a></li>
+      </ul>
+      <div class="lang-btn">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-ja" onclick="setLang('ja')">日</button>
+      </div>
+    </div>
   </nav>
 
   <!-- Hero -->
   <section id="hero">
     <img class="hero-logo" src="images/logo.png" alt="Jun Yan — Investment & Art">
     <div class="hero-divider"></div>
-    <p class="hero-tagline">Where Classical Chinese Heritage Meets Discerning Investment</p>
-    <div class="scroll-hint">Explore</div>
+    <p class="hero-tagline" data-i18n="hero-tagline">Where Classical Chinese Heritage Meets Discerning Investment</p>
+    <div class="scroll-hint" data-i18n="scroll-hint">Explore</div>
   </section>
 
   <!-- About -->
@@ -423,13 +455,13 @@
         <img src="images/gallery-01.jpg" alt="Jun Yan Art Gallery">
       </div>
       <div class="about-text">
-        <p class="section-label">Our Story</p>
-        <h2 class="section-title">Heritage as Investment</h2>
-        <p class="section-body">
+        <p class="section-label" data-i18n="about-label">Our Story</p>
+        <h2 class="section-title" data-i18n="about-title">Heritage as Investment</h2>
+        <p class="section-body" data-i18n="about-body1">
           Jun Yan Investment &amp; Art bridges the world of classical Chinese cultural heritage and modern connoisseurship. We specialize in traditional calligraphy, stone seal rubbings (金石拓片), and ancient Buddhist artifacts — rare works of enduring historical and aesthetic significance.
         </p>
         <br>
-        <p class="section-body">
+        <p class="section-body" data-i18n="about-body2">
           Our collection spans Northern Wei Buddhist stone carvings, Han dynasty painted tomb tiles, and contemporary masters of the classical ink arts. Each work is selected for its authenticity, provenance, and the depth of civilization it carries.
         </p>
       </div>
@@ -439,190 +471,94 @@
   <!-- Calligraphy & Seal Art -->
   <section id="calligraphy">
     <div class="section-header">
-      <p class="section-label">Collection</p>
-      <h2 class="section-title">Calligraphy &amp; Seal Art<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">金石书法</span></h2>
-      <p class="section-body">
+      <p class="section-label" data-i18n="calli-label">Collection</p>
+      <h2 class="section-title" data-i18n-html="calli-title">Calligraphy &amp; Seal Art<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">金石书法</span></h2>
+      <p class="section-body" data-i18n="calli-body">
         Stone seal rubbings are among China's oldest art forms — capturing inscriptions from ancient bronze vessels, stone stelae, and carved seals. Combined with classical calligraphy, these works document millennia of Chinese civilization, spiritual practice, and philosophical thought.
       </p>
     </div>
     <div class="ornament">— ✦ —</div>
-    <div class="gallery-grid" id="calligraphy-gallery">
-      <div class="gallery-item" onclick="openLightbox('images/artwork-06.jpg')">
-        <img src="images/artwork-06.jpg" alt="Northern Wei Buddhist Stone Inscription Rubbing">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-02.jpg')">
-        <img src="images/artwork-02.jpg" alt="Sichuan Longxing Temple Relic Rubbing">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-08.jpg')">
-        <img src="images/artwork-08.jpg" alt="Chang Yu Shan Hui — Calligraphy and Seal Art">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-poster.jpg')">
-        <img src="images/artwork-poster.jpg" alt="Exhibition Artwork — Zhang Zhenguo & Sun Jun">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-05.jpg')">
-        <img src="images/artwork-05.jpg" alt="Chang Yu Shan Hui — Framed Piece">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-04.jpg')">
-        <img src="images/artwork-04.jpg" alt="Seal Rubbing with Calligraphy Text">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-01.jpg')">
-        <img src="images/artwork-01.jpg" alt="Calligraphy Diptych — Home Collection">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-03.jpg')">
-        <img src="images/artwork-03.jpg" alt="Classical Seal and Calligraphy Work">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-07.jpg')">
-        <img src="images/artwork-07.jpg" alt="Ink and Seal Composition">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-09.jpg')">
-        <img src="images/artwork-09.jpg" alt="Calligraphy Work">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-10.jpg')">
-        <img src="images/artwork-10.jpg" alt="Seal Rubbing Composition">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-11.jpg')">
-        <img src="images/artwork-11.jpg" alt="Tang Dynasty Guanyin Bodhisattva Seal Rubbing — 凛相莊嚴">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-12.jpg')">
-        <img src="images/artwork-12.jpg" alt="Calligraphy Scroll — Diamond Sutra">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/artwork-13.jpg')">
-        <img src="images/artwork-13.jpg" alt="Large Horizontal Seal Rubbing and Calligraphy">
-        <div class="overlay"></div>
-      </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox('images/artwork-06.jpg')"><img src="images/artwork-06.jpg" alt="Northern Wei Buddhist Stone Inscription Rubbing"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-02.jpg')"><img src="images/artwork-02.jpg" alt="Sichuan Longxing Temple Relic Rubbing"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-08.jpg')"><img src="images/artwork-08.jpg" alt="Chang Yu Shan Hui — Calligraphy and Seal Art"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-poster.jpg')"><img src="images/artwork-poster.jpg" alt="Exhibition Artwork — Zhang Zhenguo & Sun Jun"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-05.jpg')"><img src="images/artwork-05.jpg" alt="Chang Yu Shan Hui — Framed Piece"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-04.jpg')"><img src="images/artwork-04.jpg" alt="Seal Rubbing with Calligraphy Text"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-01.jpg')"><img src="images/artwork-01.jpg" alt="Calligraphy Diptych — Home Collection"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-03.jpg')"><img src="images/artwork-03.jpg" alt="Classical Seal and Calligraphy Work"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-07.jpg')"><img src="images/artwork-07.jpg" alt="Ink and Seal Composition"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-09.jpg')"><img src="images/artwork-09.jpg" alt="Calligraphy Work"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-10.jpg')"><img src="images/artwork-10.jpg" alt="Seal Rubbing Composition"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-11.jpg')"><img src="images/artwork-11.jpg" alt="Tang Dynasty Guanyin Bodhisattva Seal Rubbing"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-12.jpg')"><img src="images/artwork-12.jpg" alt="Calligraphy Scroll — Diamond Sutra"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/artwork-13.jpg')"><img src="images/artwork-13.jpg" alt="Large Horizontal Seal Rubbing and Calligraphy"><div class="overlay"></div></div>
     </div>
   </section>
 
   <!-- Antiquities -->
   <section id="antiquities">
     <div class="section-header">
-      <p class="section-label">Collection</p>
-      <h2 class="section-title">Antiquities &amp; Artifacts<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">珍贵文物</span></h2>
-      <p class="section-body">
+      <p class="section-label" data-i18n="antiq-label">Collection</p>
+      <h2 class="section-title" data-i18n-html="antiq-title">Antiquities &amp; Artifacts<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">珍贵文物</span></h2>
+      <p class="section-body" data-i18n="antiq-body">
         Our antiquities collection encompasses Buddhist stone sculptures from the Northern Wei, Tang, and Song dynasties, alongside Han dynasty painted tomb tiles and rare jade pieces. Each artifact is a fragment of history preserved across centuries — objects of scholarly significance and timeless beauty.
       </p>
     </div>
     <div class="ornament">— ✦ —</div>
     <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox('images/antique-10.jpg')">
-        <img src="images/antique-10.jpg" alt="Buddhist Stone Carved Face — Close Detail">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-01.jpg')">
-        <img src="images/antique-01.jpg" alt="Buddha Head — Gray Limestone">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-09.jpg')">
-        <img src="images/antique-09.jpg" alt="Reclining Buddha Stone Relief Fragment">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-03.jpg')">
-        <img src="images/antique-03.jpg" alt="Buddhist Figure — White Marble Fragment">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-04.jpg')">
-        <img src="images/antique-04.jpg" alt="Han Dynasty Painted Tomb Tile — Dragon Motif">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-08.jpg')">
-        <img src="images/antique-08.jpg" alt="Buddhist Stone Fragment — Library Collection">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-02.jpg')">
-        <img src="images/antique-02.jpg" alt="Ancient Stone Vessel">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-05.jpg')">
-        <img src="images/antique-05.jpg" alt="Stone Carving Fragment">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-06.jpg')">
-        <img src="images/antique-06.jpg" alt="Buddhist Artifact">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-07.jpg')">
-        <img src="images/antique-07.jpg" alt="Ancient Carved Fragment">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-11.jpg')">
-        <img src="images/antique-11.jpg" alt="Buddhist Stone Sculpture">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-12.jpg')">
-        <img src="images/antique-12.jpg" alt="Polychrome Buddha Head — Front View">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-13.jpg')">
-        <img src="images/antique-13.jpg" alt="Polychrome Buddha Head — Side View">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-14.jpg')">
-        <img src="images/antique-14.jpg" alt="Standing Buddha Figure — Full Body, Stone">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-15.jpg')">
-        <img src="images/antique-15.jpg" alt="Headless Bodhisattva Torso with Beaded Necklace">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-16.jpg')">
-        <img src="images/antique-16.jpg" alt="Buddha Head — Gray Stone">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-17.jpg')">
-        <img src="images/antique-17.jpg" alt="Small Buddha Head">
-        <div class="overlay"></div>
-      </div>
-      <div class="gallery-item" onclick="openLightbox('images/antique-18.jpg')">
-        <img src="images/antique-18.jpg" alt="Flying Apsara Stone Relief Carving">
-        <div class="overlay"></div>
-      </div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-10.jpg')"><img src="images/antique-10.jpg" alt="Buddhist Stone Carved Face"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-01.jpg')"><img src="images/antique-01.jpg" alt="Buddha Head — Gray Limestone"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-09.jpg')"><img src="images/antique-09.jpg" alt="Reclining Buddha Stone Relief Fragment"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-03.jpg')"><img src="images/antique-03.jpg" alt="Buddhist Figure — White Marble Fragment"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-04.jpg')"><img src="images/antique-04.jpg" alt="Han Dynasty Painted Tomb Tile — Dragon Motif"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-08.jpg')"><img src="images/antique-08.jpg" alt="Buddhist Stone Fragment — Library Collection"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-02.jpg')"><img src="images/antique-02.jpg" alt="Ancient Stone Vessel"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-05.jpg')"><img src="images/antique-05.jpg" alt="Stone Carving Fragment"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-06.jpg')"><img src="images/antique-06.jpg" alt="Buddhist Artifact"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-07.jpg')"><img src="images/antique-07.jpg" alt="Ancient Carved Fragment"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-11.jpg')"><img src="images/antique-11.jpg" alt="Buddhist Stone Sculpture"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-12.jpg')"><img src="images/antique-12.jpg" alt="Polychrome Buddha Head — Front View"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-13.jpg')"><img src="images/antique-13.jpg" alt="Polychrome Buddha Head — Side View"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-14.jpg')"><img src="images/antique-14.jpg" alt="Standing Buddha Figure — Full Body"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-15.jpg')"><img src="images/antique-15.jpg" alt="Headless Bodhisattva Torso with Beaded Necklace"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-16.jpg')"><img src="images/antique-16.jpg" alt="Buddha Head — Gray Stone"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-17.jpg')"><img src="images/antique-17.jpg" alt="Small Buddha Head"><div class="overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox('images/antique-18.jpg')"><img src="images/antique-18.jpg" alt="Flying Apsara Stone Relief Carving"><div class="overlay"></div></div>
     </div>
   </section>
 
   <!-- Exhibition -->
   <section id="exhibition">
     <div class="section-header">
-      <p class="section-label">Exhibition</p>
-      <h2 class="section-title">常與善會<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Chang Yu Shan Hui · Tokyo 2026</span></h2>
-      <p class="section-body">
+      <p class="section-label" data-i18n="exhib-label">Exhibition</p>
+      <h2 class="section-title" data-i18n-html="exhib-title">常與善會<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Chang Yu Shan Hui · Tokyo 2026</span></h2>
+      <p class="section-body" data-i18n="exhib-body">
         A joint exhibition by calligraphers Zhang Zhenguo and Sun Jun, presented in partnership with Jun Yan Art. Held January 21–26, 2026 in Tokyo, the exhibition brought together classical stone seal rubbings and calligraphy in dialogue with a live Japanese audience.
       </p>
     </div>
     <div class="exhibit-grid">
-      <img src="images/gallery-02.jpg" alt="Exhibition Gallery — Wide View" onclick="openLightbox('images/gallery-02.jpg')" style="cursor:zoom-in">
-      <img src="images/gallery-03.jpg" alt="Exhibition Gallery — Second View" onclick="openLightbox('images/gallery-03.jpg')" style="cursor:zoom-in">
-      <img src="images/gallery-01.jpg" alt="Artist at Exhibition" onclick="openLightbox('images/gallery-01.jpg')" style="cursor:zoom-in">
+      <img src="images/gallery-02.jpg" alt="Exhibition Gallery — Wide View"          onclick="openLightbox('images/gallery-02.jpg')" style="cursor:zoom-in">
+      <img src="images/gallery-03.jpg" alt="Exhibition Gallery — Second View"        onclick="openLightbox('images/gallery-03.jpg')" style="cursor:zoom-in">
+      <img src="images/gallery-01.jpg" alt="Artist at Exhibition"                   onclick="openLightbox('images/gallery-01.jpg')" style="cursor:zoom-in">
       <img src="images/gallery-04.jpg" alt="Exhibition Gallery — Three Framed Works" onclick="openLightbox('images/gallery-04.jpg')" style="cursor:zoom-in">
     </div>
     <div class="exhibition-details">
       <div class="exhibit-meta">
-        <p class="label">Dates</p>
-        <p class="value">January 21 – 26, 2026</p>
+        <p class="label" data-i18n="exhib-dates-label">Dates</p>
+        <p class="value" data-i18n="exhib-dates-val">January 21 – 26, 2026</p>
       </div>
       <div class="exhibit-meta">
-        <p class="label">Location</p>
-        <p class="value">Tokyo, Japan</p>
+        <p class="label" data-i18n="exhib-loc-label">Location</p>
+        <p class="value" data-i18n="exhib-loc-val">Tokyo, Japan</p>
       </div>
       <div class="exhibit-meta">
-        <p class="label">Artists</p>
+        <p class="label" data-i18n="exhib-artists-label">Artists</p>
         <p class="value">張振國 · 孫君</p>
       </div>
       <div class="exhibit-meta">
-        <p class="label">Presented by</p>
-        <p class="value">Jun Yan Investment &amp; Art</p>
+        <p class="label" data-i18n="exhib-presented-label">Presented by</p>
+        <p class="value" data-i18n="exhib-presented-val">Jun Yan Investment &amp; Art</p>
       </div>
     </div>
   </section>
@@ -631,23 +567,23 @@
   <footer id="contact">
     <div class="contact-inner">
       <div>
-        <p class="section-label">Get in Touch</p>
-        <h2 class="section-title">Inquiries &amp;<br>Acquisitions</h2>
-        <p class="section-body">
+        <p class="section-label" data-i18n="contact-label">Get in Touch</p>
+        <h2 class="section-title" data-i18n-html="contact-title">Inquiries &amp;<br>Acquisitions</h2>
+        <p class="section-body" data-i18n="contact-body1">
           Whether you are a collector, investor, or simply drawn to the beauty of Chinese cultural heritage, we welcome your inquiry. Each piece in our collection carries a story worth telling.
         </p>
       </div>
       <div>
-        <p class="section-body" style="margin-top:0.5rem;">
+        <p class="section-body" style="margin-top:0.5rem;" data-i18n="contact-body2">
           For acquisition inquiries, exhibition partnerships, or consultations on art investment, please reach out directly.
         </p>
         <div class="contact-links">
           <a href="mailto:juwen5658@sina.com">
-            <span class="link-label">Email</span>
+            <span class="link-label" data-i18n="contact-email-label">Email</span>
             juwen5658@sina.com
           </a>
           <a href="https://github.com/junyanart" target="_blank" rel="noopener">
-            <span class="link-label">Web</span>
+            <span class="link-label" data-i18n="contact-web-label">Web</span>
             junyanart.github.io
           </a>
         </div>
@@ -655,7 +591,7 @@
     </div>
     <div class="footer-bottom">
       <span class="footer-logo">Jun Yan — Investment &amp; Art</span>
-      <span class="footer-copy">&copy; 2026 Jun Yan Investment &amp; Art. All rights reserved.</span>
+      <span class="footer-copy" data-i18n="footer-copy">&copy; 2026 Jun Yan Investment &amp; Art. All rights reserved.</span>
     </div>
   </footer>
 
@@ -666,26 +602,122 @@
   </div>
 
   <script>
-    // Navbar scroll effect
+    // ── Translations ──────────────────────────────────────────────
+    const T = {
+      en: {
+        'nav-about':       'About',
+        'nav-calligraphy': 'Calligraphy',
+        'nav-antiquities': 'Antiquities',
+        'nav-exhibition':  'Exhibition',
+        'nav-contact':     'Contact',
+        'hero-tagline':    'Where Classical Chinese Heritage Meets Discerning Investment',
+        'scroll-hint':     'Explore',
+        'about-label':     'Our Story',
+        'about-title':     'Heritage as Investment',
+        'about-body1':     'Jun Yan Investment & Art bridges the world of classical Chinese cultural heritage and modern connoisseurship. We specialize in traditional calligraphy, stone seal rubbings (金石拓片), and ancient Buddhist artifacts — rare works of enduring historical and aesthetic significance.',
+        'about-body2':     'Our collection spans Northern Wei Buddhist stone carvings, Han dynasty painted tomb tiles, and contemporary masters of the classical ink arts. Each work is selected for its authenticity, provenance, and the depth of civilization it carries.',
+        'calli-label':     'Collection',
+        'calli-title':     'Calligraphy &amp; Seal Art<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">金石书法</span>',
+        'calli-body':      "Stone seal rubbings are among China's oldest art forms — capturing inscriptions from ancient bronze vessels, stone stelae, and carved seals. Combined with classical calligraphy, these works document millennia of Chinese civilization, spiritual practice, and philosophical thought.",
+        'antiq-label':     'Collection',
+        'antiq-title':     'Antiquities &amp; Artifacts<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">珍贵文物</span>',
+        'antiq-body':      'Our antiquities collection encompasses Buddhist stone sculptures from the Northern Wei, Tang, and Song dynasties, alongside Han dynasty painted tomb tiles and rare jade pieces. Each artifact is a fragment of history preserved across centuries — objects of scholarly significance and timeless beauty.',
+        'exhib-label':     'Exhibition',
+        'exhib-title':     '常與善會<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Chang Yu Shan Hui · Tokyo 2026</span>',
+        'exhib-body':      'A joint exhibition by calligraphers Zhang Zhenguo and Sun Jun, presented in partnership with Jun Yan Art. Held January 21–26, 2026 in Tokyo, the exhibition brought together classical stone seal rubbings and calligraphy in dialogue with a live Japanese audience.',
+        'exhib-dates-label':     'Dates',
+        'exhib-dates-val':       'January 21 – 26, 2026',
+        'exhib-loc-label':       'Location',
+        'exhib-loc-val':         'Tokyo, Japan',
+        'exhib-artists-label':   'Artists',
+        'exhib-presented-label': 'Presented by',
+        'exhib-presented-val':   'Jun Yan Investment &amp; Art',
+        'contact-label':   'Get in Touch',
+        'contact-title':   'Inquiries &amp;<br>Acquisitions',
+        'contact-body1':   'Whether you are a collector, investor, or simply drawn to the beauty of Chinese cultural heritage, we welcome your inquiry. Each piece in our collection carries a story worth telling.',
+        'contact-body2':   'For acquisition inquiries, exhibition partnerships, or consultations on art investment, please reach out directly.',
+        'contact-email-label': 'Email',
+        'contact-web-label':   'Web',
+        'footer-copy':     '© 2026 Jun Yan Investment & Art. All rights reserved.',
+      },
+      ja: {
+        'nav-about':       'について',
+        'nav-calligraphy': '書道',
+        'nav-antiquities': '古代遺物',
+        'nav-exhibition':  '展覧会',
+        'nav-contact':     'お問い合わせ',
+        'hero-tagline':    '中国の古典的な文化遺産と卓越した投資の融合',
+        'scroll-hint':     '探索',
+        'about-label':     '私たちについて',
+        'about-title':     '文化遺産への投資',
+        'about-body1':     '俊燕投資芸術は、中国古典文化遺産の世界と現代の審美眼を結びつけます。伝統書道、金石拓片（きんせきたくへん）、古代仏教遺物を専門とし、歴史的・美的価値において永続的な意義を持つ稀少な作品を取り扱っています。',
+        'about-body2':     'コレクションは北魏の仏教石刻、漢代の彩色墓誌磚、そして現代の古典墨芸術の巨匠たちの作品に及びます。各作品は真正性、来歴、そしてそれが担う文明の深さによって厳選されています。',
+        'calli-label':     'コレクション',
+        'calli-title':     '書道と金石芸術<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">金石书法</span>',
+        'calli-body':      '金石拓片は中国最古の芸術形式の一つです。古代の青銅器、石碑、刻印の銘文を写し取り、古典書道と組み合わせることで、中国文明の数千年にわたる精神的実践と哲学的思想を記録しています。',
+        'antiq-label':     'コレクション',
+        'antiq-title':     '古代遺物と工芸品<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">珍贵文物</span>',
+        'antiq-body':      '古代遺物コレクションは、北魏・唐・宋代の仏教石刻、漢代の彩色墓誌磚、稀少な玉器を含んでいます。各遺物は何世紀にもわたって保存された歴史の断片であり、学術的な重要性と時代を超えた美しさを持つ品々です。',
+        'exhib-label':     '展覧会',
+        'exhib-title':     '常與善會<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">常與善會 · 東京 2026</span>',
+        'exhib-body':      '書家・張振国と孫君による合同展覧会で、俊燕芸術との共同開催。2026年1月21日から26日まで東京で開催され、古典的な金石拓片と書道が日本の観客との対話の中で一堂に会しました。',
+        'exhib-dates-label':     '期間',
+        'exhib-dates-val':       '2026年1月21日〜26日',
+        'exhib-loc-label':       '場所',
+        'exhib-loc-val':         '東京、日本',
+        'exhib-artists-label':   '作家',
+        'exhib-presented-label': '主催',
+        'exhib-presented-val':   '俊燕投資芸術',
+        'contact-label':   'お問い合わせ',
+        'contact-title':   'お問い合わせと<br>作品購入',
+        'contact-body1':   'コレクター、投資家、あるいは中国文化遺産の美しさに魅せられた方、いずれの方でもお気軽にお問い合わせください。コレクションの各作品には、語るべき物語があります。',
+        'contact-body2':   '作品購入のお問い合わせ、展覧会パートナーシップ、または美術投資に関するご相談は、直接ご連絡ください。',
+        'contact-email-label': 'メール',
+        'contact-web-label':   'ウェブ',
+        'footer-copy':     '© 2026 俊燕投資芸術. 無断転載禁止。',
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      // Plain text elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key] !== undefined) el.textContent = T[lang][key];
+      });
+
+      // HTML elements (titles with embedded spans)
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+      });
+
+      // Toggle button active state
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    }
+
+    // ── Navbar scroll effect ──────────────────────────────────────
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Lightbox
+    // ── Lightbox ──────────────────────────────────────────────────
     function openLightbox(src) {
-      const lb = document.getElementById('lightbox');
       document.getElementById('lightbox-img').src = src;
-      lb.classList.add('active');
+      document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('active');
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
   </script>
 </body>
 </html>
