@@ -252,13 +252,18 @@
     .gallery-item:hover .overlay { background: rgba(45, 41, 39, 0.18); }
 
     /* ── Exhibition Section ── */
-    #exhibition .exhibit-grid {
+    .exhibit-block {
       max-width: 1100px;
-      margin: 0 auto;
+      margin: 0 auto 5rem;
+    }
+    .exhibit-block:last-of-type { margin-bottom: 0; }
+    .exhibit-block .section-header { margin-bottom: 2.5rem; }
+    #exhibition .exhibit-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.2rem;
     }
+    #exhibition .exhibit-grid.exhibit-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
     #exhibition .exhibit-grid img {
       width: 100%;
       height: 340px;
@@ -266,9 +271,9 @@
       display: block;
       transition: transform 0.4s;
     }
+    #exhibition .exhibit-grid.exhibit-grid-3 img { height: 280px; }
     #exhibition .exhibit-grid img:hover { transform: scale(1.02); }
     .exhibition-details {
-      max-width: 1100px;
       margin: 3rem auto 0;
       display: flex;
       gap: 4rem;
@@ -401,6 +406,7 @@
       #about .about-image { display: none; }
       .gallery-grid { columns: 2; }
       #exhibition .exhibit-grid { grid-template-columns: 1fr 1fr; }
+      #exhibition .exhibit-grid.exhibit-grid-3 { grid-template-columns: 1fr 1fr; }
       #contact .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
     }
@@ -410,6 +416,7 @@
       .nav-links a { font-size: 0.65rem; }
       .gallery-grid { columns: 1; }
       #exhibition .exhibit-grid { grid-template-columns: 1fr; }
+      #exhibition .exhibit-grid.exhibit-grid-3 { grid-template-columns: 1fr; }
       .exhibition-details { flex-direction: column; gap: 1.5rem; }
     }
   </style>
@@ -507,35 +514,74 @@
   <section id="exhibition">
     <div class="section-header">
       <p class="section-label" data-i18n="exhib-label">Exhibition</p>
-      <h2 class="section-title" data-i18n-html="exhib-title">展會<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Zhan Hui · Osaka 2026</span></h2>
-      <p class="section-body" data-i18n="exhib-body">
-        An exhibition by calligrapher Sun Jun, presented in partnership with Jun Yan Art. Held January 21–26, 2026 in Osaka, the exhibition brought together classical stone seal rubbings and calligraphy in dialogue with a live Japanese audience.
-      </p>
     </div>
-    <div class="exhibit-grid">
-      <img src="images/gallery-01.png" alt="Exhibition Gallery — Three Framed Works" onclick="openLightbox('images/gallery-01.png')" style="cursor:zoom-in">
-      <img src="images/gallery-02.png" alt="Exhibition Gallery — Wide View"         onclick="openLightbox('images/gallery-02.png')" style="cursor:zoom-in">
-      <img src="images/gallery-03.png" alt="Artist at Exhibition"                   onclick="openLightbox('images/gallery-03.png')" style="cursor:zoom-in">
-      <img src="images/gallery-04.png" alt="Exhibition Gallery — Flower Arrangement" onclick="openLightbox('images/gallery-04.png')" style="cursor:zoom-in">
-      <img src="images/gallery-05.png" alt="Exhibition — Orchid Arrangement with Northern Wei Rubbing" onclick="openLightbox('images/gallery-05.png')" style="cursor:zoom-in">
-      <img src="images/gallery-06.png" alt="Exhibition — Large Horizontal Seal Rubbing" onclick="openLightbox('images/gallery-06.png')" style="cursor:zoom-in">
+
+    <div class="exhibit-block">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n-html="exhib-title">展會<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Zhan Hui · Osaka 2026</span></h2>
+        <p class="section-body" data-i18n="exhib-body">
+          An exhibition by calligrapher Sun Jun, presented in partnership with Jun Yan Art. Held January 21–26, 2026 in Osaka, the exhibition brought together classical stone seal rubbings and calligraphy in dialogue with a live Japanese audience.
+        </p>
+      </div>
+      <div class="exhibit-grid">
+        <img src="images/gallery-01.png" alt="Exhibition Gallery — Three Framed Works" onclick="openLightbox('images/gallery-01.png')" style="cursor:zoom-in">
+        <img src="images/gallery-02.png" alt="Exhibition Gallery — Wide View"         onclick="openLightbox('images/gallery-02.png')" style="cursor:zoom-in">
+        <img src="images/gallery-03.png" alt="Artist at Exhibition"                   onclick="openLightbox('images/gallery-03.png')" style="cursor:zoom-in">
+        <img src="images/gallery-04.png" alt="Exhibition Gallery — Flower Arrangement" onclick="openLightbox('images/gallery-04.png')" style="cursor:zoom-in">
+        <img src="images/gallery-05.png" alt="Exhibition — Orchid Arrangement with Northern Wei Rubbing" onclick="openLightbox('images/gallery-05.png')" style="cursor:zoom-in">
+        <img src="images/gallery-06.png" alt="Exhibition — Large Horizontal Seal Rubbing" onclick="openLightbox('images/gallery-06.png')" style="cursor:zoom-in">
+      </div>
+      <div class="exhibition-details">
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-dates-label">Dates</p>
+          <p class="value" data-i18n="exhib-dates-val">January 21 – 26, 2026</p>
+        </div>
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-loc-label">Location</p>
+          <p class="value" data-i18n="exhib-loc-val">Osaka, Japan</p>
+        </div>
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-artists-label">Artists</p>
+          <p class="value">孫君</p>
+        </div>
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-presented-label">Presented by</p>
+          <p class="value" data-i18n="exhib-presented-val">Jun Yan Investment &amp; Art</p>
+        </div>
+      </div>
     </div>
-    <div class="exhibition-details">
-      <div class="exhibit-meta">
-        <p class="label" data-i18n="exhib-dates-label">Dates</p>
-        <p class="value" data-i18n="exhib-dates-val">January 21 – 26, 2026</p>
+
+    <div class="ornament">— ✦ —</div>
+
+    <div class="exhibit-block">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n-html="exhib2-title">韓燕希油畫展<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Han Yanxi Oil Painting Exhibition · Osaka 2026</span></h2>
+        <p class="section-body" data-i18n="exhib2-body">
+          A solo exhibition of oil paintings by Han Yanxi, presented in partnership with Jun Yan Art. Held August 8–13, 2026 in Osaka, the exhibition presented a series of contemporary figurative works exploring childhood, memory, and quiet surrealism.
+        </p>
       </div>
-      <div class="exhibit-meta">
-        <p class="label" data-i18n="exhib-loc-label">Location</p>
-        <p class="value" data-i18n="exhib-loc-val">Osaka, Japan</p>
+      <div class="exhibit-grid exhibit-grid-3">
+        <img src="images/oil_painting-01.png" alt="Han Yanxi Oil Painting Exhibition — Wall Signage" onclick="openLightbox('images/oil_painting-01.png')" style="cursor:zoom-in">
+        <img src="images/oil_painting-02.png" alt="Artist Han Yanxi at the Exhibition"                onclick="openLightbox('images/oil_painting-02.png')" style="cursor:zoom-in">
+        <img src="images/oil_painting-03.png" alt="Han Yanxi Oil Painting Exhibition — Gallery Views" onclick="openLightbox('images/oil_painting-03.png')" style="cursor:zoom-in">
       </div>
-      <div class="exhibit-meta">
-        <p class="label" data-i18n="exhib-artists-label">Artists</p>
-        <p class="value">孫君</p>
-      </div>
-      <div class="exhibit-meta">
-        <p class="label" data-i18n="exhib-presented-label">Presented by</p>
-        <p class="value" data-i18n="exhib-presented-val">Jun Yan Investment &amp; Art</p>
+      <div class="exhibition-details">
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-dates-label">Dates</p>
+          <p class="value" data-i18n="exhib2-dates-val">August 8 – 13, 2026</p>
+        </div>
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-loc-label">Location</p>
+          <p class="value" data-i18n="exhib2-loc-val">Osaka, Japan</p>
+        </div>
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-artists-label">Artists</p>
+          <p class="value">韓燕希</p>
+        </div>
+        <div class="exhibit-meta">
+          <p class="label" data-i18n="exhib-presented-label">Presented by</p>
+          <p class="value" data-i18n="exhib-presented-val">Jun Yan Investment &amp; Art</p>
+        </div>
       </div>
     </div>
   </section>
@@ -609,6 +655,10 @@
         'exhib-artists-label':   'Artists',
         'exhib-presented-label': 'Presented by',
         'exhib-presented-val':   'Jun Yan Investment &amp; Art',
+        'exhib2-title':    '韓燕希油畫展<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">Han Yanxi Oil Painting Exhibition · Osaka 2026</span>',
+        'exhib2-body':     'A solo exhibition of oil paintings by Han Yanxi, presented in partnership with Jun Yan Art. Held August 8–13, 2026 in Osaka, the exhibition presented a series of contemporary figurative works exploring childhood, memory, and quiet surrealism.',
+        'exhib2-dates-val':      'August 8 – 13, 2026',
+        'exhib2-loc-val':        'Osaka, Japan',
         'contact-label':   'Get in Touch',
         'contact-title':   'Inquiries &amp;<br>Acquisitions',
         'contact-body1':   'Whether you are a collector, investor, or simply drawn to the beauty of Chinese cultural heritage, we welcome your inquiry. Each piece in our collection carries a story worth telling.',
@@ -645,6 +695,10 @@
         'exhib-artists-label':   '作家',
         'exhib-presented-label': '主催',
         'exhib-presented-val':   '俊燕投資芸術',
+        'exhib2-title':    '韓燕希油画展<br><span style="font-style:italic;font-size:0.65em;color:var(--ink-light);">韓燕希油画展 · 大阪 2026</span>',
+        'exhib2-body':     '画家・韓燕希による油絵展で、俊燕芸術との共同開催。2026年8月8日から13日まで大阪で開催され、幼年期や記憶、静かなシュルレアリスムをテーマにした現代具象油絵の数々が展示されました。',
+        'exhib2-dates-val':      '2026年8月8日〜13日',
+        'exhib2-loc-val':        '大阪、日本',
         'contact-label':   'お問い合わせ',
         'contact-title':   'お問い合わせと<br>作品購入',
         'contact-body1':   'コレクター、投資家、あるいは中国文化遺産の美しさに魅せられた方、いずれの方でもお気軽にお問い合わせください。コレクションの各作品には、語るべき物語があります。',
